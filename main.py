@@ -10,9 +10,8 @@ import random
 import os
 
 def clear_screen():
-    #Clears the console screen based on the operating system.
+    """Clears the console screen based on the operating system."""
     os.system("cls" if os.name == "nt" else "clear")
-
 
 def start_game():
     """
@@ -21,8 +20,7 @@ def start_game():
     - Tracks number of attempts and stores all guesses.
     - Clears the screen between guesses for a clean interface.
     """
-    print("~~~~~~~~~~ Number Guessing Game ~~~~~~~~~~")
-    print("A number between 1 and 100 has been selected, Can You Guess it?")
+    print("~~~~~~~~~~ Number Guessing Game ~~~~~~~~~~\nA number between 1 and 100 has been selected. Can you guess it?")
     input("Press Enter to start...")
     clear_screen()
 
@@ -33,10 +31,17 @@ def start_game():
 
     while guess != number:
         try:
-            guess = int(input("Please enter your guess (1-100): "))
+            guess = int(input("Please enter your guess (1–100): "))
+
+            if guess < 1 or guess > 100:
+                clear_screen()
+                print("❗ Please enter a number between 1 and 100.\n")
+                print("📜 Your guesses so far:", guesses)
+                print("-----------------------------------------")
+                continue
+
             attempts += 1
             guesses.append(guess)
-
             clear_screen()
 
             if guess < number:
@@ -46,7 +51,7 @@ def start_game():
             else:
                 print(f"🎉 You got it right in {attempts} attempts!")
 
-            # Display all previous guesses
+            print(f"📊 Attempt #{attempts}")
             print("📜 Your guesses so far:", guesses)
             print("-----------------------------------------")
 
@@ -56,6 +61,12 @@ def start_game():
             print("📜 Your guesses so far:", guesses)
             print("-----------------------------------------")
 
-# Run the game
+# Run the game in a loop with replay option
 if __name__ == "__main__":
-    start_game()
+    while True:
+        start_game()
+        choice = input("Would you like to play again? (y/n): ").strip().lower()
+        if choice != 'y':
+            print("Thanks for playing! 👋")
+            break
+        clear_screen()
