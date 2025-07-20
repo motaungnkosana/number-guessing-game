@@ -1,7 +1,7 @@
 # number-guessing-game
 
 A simple Python console game where the user tries to guess a number between 1 and 100.
-Includes guess history, screen clearing, and user-friendly output.
+Includes guess history, screen clearing, end or restart game, and user-friendly output.
 
 ## How to Run
 
